@@ -1,0 +1,15 @@
+Public Sub OptimizeVBA(isOn As Boolean)
+
+Application.Calculation = IIf(isOn, xlCalculationManual, xlCalculationAutomatic)
+Application.EnableEvents = Not (isOn)
+Application.ScreenUpdating = Not (isOn)
+Application.StatusBar = ""
+
+End Sub
+
+
+...
+Call OptimizeVBA(True)
+...
+Call OptimizeVBA(False)
+...
