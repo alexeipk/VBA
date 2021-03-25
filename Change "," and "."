@@ -1,0 +1,20 @@
+Private Declare Function SetLocaleInfo Lib "kernel32" Alias "SetLocaleInfoA" (ByVal Locale As Long, ByVal LCType As Long, ByVal lpLCData As String) As Boolean
+Private Declare Function GetUserDefaultLCID% Lib "kernel32" ()
+Private Const LOCALE_SDECIMAL = &HE
+Private Const LOCALE_STHOUSAND = &HF
+
+Public Function SetLocalSetting(LC_CONST As Long, Setting As String) As Boolean
+Call SetLocaleInfo(GetUserDefaultLCID(), LC_CONST, Setting)
+End Function
+
+Public Sub ChangeSetting(LNG As String)
+If LNG = "PT" Then
+  Call SetLocalSetting(LOCALE_SDECIMAL, ",")
+  Call SetLocalSetting(LOCALE_STHOUSAND, ".")
+End If
+
+If LNG = "EN" Then
+  Call SetLocalSetting(LOCALE_SDECIMAL, ".")
+  Call SetLocalSetting(LOCALE_STHOUSAND, ",")
+End If
+End Sub
